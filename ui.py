@@ -11,9 +11,9 @@ footer { display: none !important; }
 """
 
 
-def _post_camera(camera_name, node_id, channel, ip, port, admin_id, admin_password,
+def _post_camera(name, node_id, channel, ip, port, admin_id, admin_password,
                  rtsp_main_url, lat, lng):
-    if not camera_name or not node_id or not channel:
+    if not name or not node_id or not channel:
         return "<p style='color:red'>Camera Name, Node ID, Channel 필수입니다.</p>", _load_table()
     try:
         channel = int(channel)
@@ -22,7 +22,7 @@ def _post_camera(camera_name, node_id, channel, ip, port, admin_id, admin_passwo
         return "<p style='color:red'>Channel / Port 숫자여야 합니다.</p>", _load_table()
     try:
         r = requests.post(f"{API}/cameras", json={
-            "camera_name":    camera_name,
+            "name":    name,
             "node_id":        node_id,
             "channel":        channel,
             "ip":             ip,
@@ -55,7 +55,7 @@ def _load_table():
         f"<td>{r.get('ava_cam_id','')}</td>"
         f"<td>{r.get('node_id','')}</td>"
         f"<td>{r.get('channel','')}</td>"
-        f"<td>{r.get('camera_name','')}</td>"
+        f"<td>{r.get('name','')}</td>"
         f"<td>{r.get('IP','')}</td>"
         f"<td>{r.get('PORT','')}</td>"
         f"<td>{r.get('RTSP_MAIN_URL','')}</td>"
@@ -67,7 +67,7 @@ def _load_table():
     return f"<table id='cam-table' style='border-collapse:collapse;width:100%'>{head}<tbody>{body}</tbody></table>"
 
 
-with gr.Blocks(title="Ainos Platform", theme=gr.themes.Soft(), css=_custom_css) as app:
+with gr.Blocks(title="Ainos AvaLab Connection Bridge", theme=gr.themes.Soft(), css=_custom_css) as app:
 
     with gr.Tabs() as tabs:
 
@@ -80,7 +80,7 @@ with gr.Blocks(title="Ainos Platform", theme=gr.themes.Soft(), css=_custom_css) 
                 "font-size:1.6rem;font-weight:700;letter-spacing:0.18em;"
                 "padding:6px 22px;border-radius:6px;margin-bottom:14px'>"
                 "DANUSYS</div>"
-                "<h1 style='font-size:2rem;margin-bottom:6px'>Ainos Platform</h1>"
+                "<h1 style='font-size:2rem;margin-bottom:6px'>Ainos AvaLab Connection Bridge</h1>"
                 "</div>"
             )
             gr.HTML("""

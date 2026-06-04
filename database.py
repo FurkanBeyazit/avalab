@@ -52,11 +52,11 @@ def init_bridge_db():
             cur.execute(f"USE `{BR_NAME}`")
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS camera_bridge (
-                    id         SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    id            SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     ava_cam_id SMALLINT(5) UNSIGNED NOT NULL,
-                    node_id    VARCHAR(50) NOT NULL,
-                    channel    SMALLINT(5) UNSIGNED NOT NULL,
-                    camera_name VARCHAR(200) NOT NULL DEFAULT ''
+                    node_id       VARCHAR(50) NOT NULL,
+                    channel       SMALLINT(5) UNSIGNED NOT NULL,
+                    name   VARCHAR(200) NOT NULL DEFAULT ''
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
             """)
         conn.commit()
