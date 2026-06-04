@@ -1,0 +1,7 @@
+*.sql
+.claude/
+memory/
+__pycache__/
+*.pyc
+*.ini
+*.md
